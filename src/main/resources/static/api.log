@@ -1,0 +1,60 @@
+
+Authentication API's:  
+
+## Auth0 signup
+curl -X POST \
+  https://dhruba619.eu.auth0.com/dbconnections/signup \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: 27a8aa4b-e5c9-8d56-4cc9-afbb35155aa6' \
+  -d '{
+ "client_id":"by9jdy3tInYNdP7dLgUjXmeI3rk5ouIB",
+ "email":"dhruba619@gmail.com",
+ "password":"hello",
+ "connection":"Username-Password-Authentication"
+}'
+
+Response:
+
+	{
+	  "_id": "58f7517fd9a5f84534b3e96d",
+	  "email_verified": false,
+	  "email": "dhruba619@gmail.com"
+	}
+
+
+### Auth0 get token
+curl -X POST \
+  https://dhruba619.eu.auth0.com/oauth/ro \
+  -H 'cache-control: no-cache' \
+  -H 'content-type: application/json' \
+  -H 'postman-token: c099f0a7-ee59-1174-6138-ee955b9c7c0b' \
+  -d '{
+	"client_id":"by9jdy3tInYNdP7dLgUjXmeI3rk5ouIB",
+	"username":"dhruba619@gmail.com",
+	"password":"hello",
+	"connection":"Username-Password-Authentication",
+	"scope":"openid"
+}
+
+Response: 
+	{
+	  "id_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RocnViYTYxOS5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NThmNzUxN2ZkOWE1Zjg0NTM0YjNlOTZkIiwiYXVkIjoiYnk5amR5M3RJbllOZFA3ZExnVWpYbWVJM3JrNW91SUIiLCJleHAiOjE0OTI2NDAyNzMsImlhdCI6MTQ5MjYwNDI3M30.5xFCiSM7SrD1YDfNRGn5Nnz7pYgjjD7JpOq3sufbqMc",
+	  "access_token": "uOSfuN4W-1u6agiR",
+	  "token_type": "bearer"
+	}
+	
+## Hit API
+
+curl -X GET \
+  http://localhost:8080/twitter/authorise/url \
+  -H 'authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL2RocnViYTYxOS5ldS5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NThmNzUxN2ZkOWE1Zjg0NTM0YjNlOTZkIiwiYXVkIjoiYnk5amR5M3RJbllOZFA3ZExnVWpYbWVJM3JrNW91SUIiLCJleHAiOjE0OTI2NDIyNTcsImlhdCI6MTQ5MjYwNjI1N30.-uzxqhmjsSBdyX5wCg-B9-G0IzMaafcLfR1FDP5mF4s' \
+  -H 'cache-control: no-cache' \
+  -H 'postman-token: 4c9d088d-4828-f57c-702f-07e57d207ad4' \
+  -d '{
+	"consumerKey":"d0B0kVofasvnvZywWQTenSO3a",
+    "consumerSecret":"Vxlylf9vlBh6dgZMc6uh6qbz6fVRLVz3b0LY3yR35tRMMvNjsF",
+    "accessToken":"104252500-2stTUaXDAvzIB7KSWbT62X7b96SkAGbcOMyaDxAU",
+    "accessTokenSecret":"6oSGLpoqlWt2ufVNnSbzPoars8ajv2tvTIO4yx7H9mnM1",
+    "tweetText":"hello"
+}'	

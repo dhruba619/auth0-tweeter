@@ -1,0 +1,28 @@
+function (user, context, callback) {
+
+  // ignore this rule if not correct client id of application using Rules
+   if (context.clientID !== 'RVekiqIs7B2AxtuRaju87i0DhyYkDy8T') {
+     return callback(null, user, context);
+   }
+
+  user.app_metadata = user.app_metadata || {};
+  // You can add a Role based on what you want
+  var addScopeToUser = function(user, cb) {
+      cb(null, "ROLE_ADMIN ROLE_USER");
+  };
+
+  addScopeToUser(user, function(err, scope) {
+    if (err) {
+      callback(err);
+    } else {
+      user.app_metadata.scope = scope;
+      auth0.users.updateAppMetadata(user.user_id, user.app_metadata)
+        .then(function(){
+          callback(null, user, context);
+        })
+        .catch(function(err){
+          callback(err);
+        });
+    }
+  });
+}
